@@ -8,7 +8,8 @@ module.exports = {
                 mainColor: "#313131FF",
                 focusColor: "#217346FF",
                 blockColorDarkTheme: "#595959FF",
-                blockColorLightTheme: "#CCCCCCFF"
+                blockColorLightTheme: "#CCCCCCFF",
+                border:"#A5A5A5FF"
             },
             height: {
                 full: "55%"

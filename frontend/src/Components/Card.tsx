@@ -1,25 +1,23 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {User} from "../Object/User";
 import {v4 as uuidv4} from 'uuid';
 import {ArrayContext, ModeContext} from "../Context/context";
-import {Simulate} from "react-dom/test-utils";
-import pointerCancel = Simulate.pointerCancel;
-import theme from "tailwindcss/defaultTheme";
+import {chevronUp, chevronDown} from "../Icons/icons"
 
 function Card() {
     const {users, setUsers} = useContext(ArrayContext)
     const {mode, setMode} = useContext(ModeContext)
     const [name, setName] = useState<string>("")
-    const [age, setAge] = useState<string>("")
+    const [age, setAge] = useState<number>(0)
     const [subscription, setSubscription] = useState<string>("")
     const [employment, setEmployment] = useState<boolean>(false)
 
     function save() {
-        if (name !== "" && age !== ""){
+        if (name !== "" && age !== 0) {
             const user: User = {
                 id: uuidv4(),
                 name,
-                age: parseInt(age),
+                age,
                 subscription,
                 employment
             }
@@ -45,7 +43,7 @@ function Card() {
 
     function reset(): void {
         setName("")
-        setAge("")
+        setAge(0)
         setSubscription("")
         setEmployment(false)
     }
@@ -60,13 +58,24 @@ function Card() {
                 onChange={(e) => setName(e.target.value)}
             />
 
-            <input
-                className="shadow border-2 border-gray-600 dark:bg-mainColor rounded w-full my-2 py-2 px-3 dark:text-white leading-tight focus:outline-none focus:shadow-outline focus:border-2 focus:border-focusColor"
-                type="number"
-                placeholder="Age"
-                value={age}
-                onChange={(e) => setAge(e.target.value)}
-            />
+            <div className="flex">
+                <input
+                    className="shadow border-2 border-gray-600 dark:bg-mainColor rounded w-full my-2 py-2 px-3 dark:text-white leading-tight focus:outline-none focus:shadow-outline focus:border-2 focus:border-focusColor"
+                    type="number"
+                    placeholder="Age"
+                    value={age}
+                    onChange={(e) => setAge(parseInt(e.target.value))}
+                />
+                <button
+                    className="w-20 h-10 dark:bg-blockColorDarkTheme bg-blockColorLightTheme border-r-2 border-border my-2 flex justify-center items-center" onClick={()=>setAge(age+1)}>
+                    {chevronUp}
+                </button>
+                <button
+                    className="w-20 h-10 dark:bg-blockColorDarkTheme bg-blockColorLightTheme my-2 flex justify-center items-center" onClick={()=>setAge(age-1)}>
+                    {chevronDown}
+                </button>
+            </div>
+
             <select
                 value={subscription}
                 onChange={(e) => setSubscription(e.target.value)}
