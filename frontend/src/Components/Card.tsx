@@ -13,7 +13,7 @@ function Card() {
     const [employment, setEmployment] = useState<boolean>(false)
 
     function save() {
-        if (name !== "" && age !== 0) {
+        if (name !== "" && age !== 0 && subscription !== "") {
             const user: User = {
                 id: uuidv4(),
                 name,
