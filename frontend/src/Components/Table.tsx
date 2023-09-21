@@ -25,7 +25,7 @@ function Table() {
                 <tbody>
                     {
                         users?.map(item =>
-                            <tr className={localStorage.getItem("currentColumn")===item.id?'bg-focusColor text-white':''} onClick={()=>selectColumn(item.id)}>
+                            <tr className={`${localStorage.getItem("currentColumn")===item.id?'bg-focusColor text-white':''} text-center`} onClick={()=>selectColumn(item.id)}>
                                 <td>{item.name}</td>
                                 <td>{item.age}</td>
                                 <td>{item.subscription}</td>
